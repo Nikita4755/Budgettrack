@@ -17,20 +17,30 @@ import kotlinx.android.synthetic.main.activity_add_transaction.labelLayout
 import kotlinx.android.synthetic.main.activity_detailed.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import java.util.Locale
 
+import java.util.Calendar
+import java.text.SimpleDateFormat
 class DetailedActivity : AppCompatActivity() {
-    private lateinit var transaction : Transaction
+    private lateinit var transaction: Transaction
+    private val calendar = Calendar.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detailed)
 
-        transaction = intent.getSerializableExtra("transaction") as Transaction
+        val transaction = intent.getSerializableExtra("transaction") as Transaction
+        val dateString = transaction.date
 
         labelInput.setText(transaction.label)
         amountInput.setText(transaction.amount.toString())
         descriptionInput.setText(transaction.description)
+        val myDateFormat  = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
 
+        if (dateString.isNotEmpty()) {
+            val date = myDateFormat.parse(dateString)
+            calendar.time = date
+        }
 
         rootView.setOnClickListener {
             this.window.decorView.clearFocus()
@@ -70,7 +80,10 @@ class DetailedActivity : AppCompatActivity() {
                 update(transaction)
             }
         }
+        val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+        val formattedDate = dateFormat.format(calendar.time)
 
+        dateTextViewDetailed.text = formattedDate
         closeBtn.setOnClickListener {
             finish()
         }

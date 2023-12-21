@@ -80,6 +80,20 @@
                 android:drawableStart="@drawable/description_selector"
                 android:drawablePadding="12dp"
                 android:inputType="text|textMultiLine"/>
+            <TextView
+                android:id="@+id/dateTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Date:"
+                android:textSize="18sp"
+                android:padding="8dp"/>
+
+            <Button
+                android:id="@+id/pickDateBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Pick Date"
+                android:onClick="showDatePickerDialog"/>
         </com.google.android.material.textfield.TextInputLayout>
         <Button
             android:id="@+id/addTransactionBtn"
