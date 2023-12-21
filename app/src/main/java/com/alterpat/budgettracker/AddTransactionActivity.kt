@@ -8,19 +8,23 @@ import kotlinx.android.synthetic.main.activity_add_transaction.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
+import android.app.DatePickerDialog
+import android.widget.DatePicker
+import kotlinx.android.synthetic.main.activity_add_transaction.*
+import kotlinx.coroutines.launch
+import java.util.Calendar
 class AddTransactionActivity : AppCompatActivity() {
+
+    private var selectedYear = 0
+    private var selectedMonth = 0
+    private var selectedDay = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_transaction)
 
-        labelInput.addTextChangedListener {
-            if(it!!.count() > 0)
-                labelLayout.error = null
-        }
-
-        amountInput.addTextChangedListener {
-            if(it!!.count() > 0)
-                amountLayout.error = null
+        pickDateBtn.setOnClickListener {
+            showDatePickerDialog()
         }
 
         addTransactionBtn.setOnClickListener {
@@ -28,13 +32,12 @@ class AddTransactionActivity : AppCompatActivity() {
             val description = descriptionInput.text.toString()
             val amount = amountInput.text.toString().toDoubleOrNull()
 
-            if(label.isEmpty())
+            if (label.isEmpty()) {
                 labelLayout.error = "Please enter a valid label"
-
-            else if(amount == null)
+            } else if (amount == null) {
                 amountLayout.error = "Please enter a valid amount"
-            else {
-                val transaction  =Transaction(0, label, amount, description)
+            } else {
+                val transaction = Transaction(0, label, amount, description)
                 insert(transaction)
             }
         }
@@ -44,15 +47,39 @@ class AddTransactionActivity : AppCompatActivity() {
         }
     }
 
-    private fun insert(transaction: Transaction){
-        val db = Room.databaseBuilder(this,
+    private fun showDatePickerDialog() {
+        val c = Calendar.getInstance()
+        val currentYear = c.get(Calendar.YEAR)
+        val currentMonth = c.get(Calendar.MONTH)
+        val currentDay = c.get(Calendar.DAY_OF_MONTH)
+
+        val datePickerDialog = DatePickerDialog(
+            this,
+            DatePickerDialog.OnDateSetListener { _: DatePicker, year: Int, month: Int, day: Int ->
+                selectedYear = year
+                selectedMonth = month
+                selectedDay = day
+                dateTextView.text = "$day/${month + 1}/$year"
+            },
+            currentYear,
+            currentMonth,
+            currentDay
+        )
+
+        datePickerDialog.show()
+    }
+
+    private fun insert(transaction: Transaction) {
+        val db = Room.databaseBuilder(
+            this,
             AppDatabase::class.java,
-            "transactions").build()
+            "transactions"
+        ).build()
 
         GlobalScope.launch {
+            transaction.date = "$selectedYear-${selectedMonth + 1}-$selectedDay"
             db.transactionDao().insertAll(transaction)
             finish()
         }
     }
-
 }

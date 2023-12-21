@@ -50,4 +50,8 @@ class TransactionAdapter(private var transactions: List<Transaction>) :
         this.transactions = transactions
         notifyDataSetChanged()
     }
+    fun newsetData(newTransactions: List<Transaction>) {
+        transactions = newTransactions
+        notifyDataSetChanged()
+    }
 }

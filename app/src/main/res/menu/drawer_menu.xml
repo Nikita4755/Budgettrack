@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Добавьте дополнительные пункты меню, если нужно -->
+    <group android:checkableBehavior="single">
+        <!-- Другие элементы меню -->
+        <item
+            android:id="@+id/menu_item_filter_by_date"
+            android:title="Filter by Date" />
+        <item
+            android:id="@+id/menu_item1"
+            android:title="Пункт меню 1" />
+
+    </group>
+</menu>
