@@ -82,57 +82,7 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, AddTransactionActivity::class.java)
             startActivity(intent)
         }
-
-        /*  drawerLayout = findViewById(R.id.drawerLayout)
-          val navigationView = findViewById<NavigationView>(R.id.navigationView)
-          *//*val btnMenu = findViewById<ImageButton>(R.id.btnMenu)*//*
-
-        // Создаем ActionBarDrawerToggle и привязываем его к DrawerLayout
-        toggle = ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close)
-        drawerLayout.addDrawerListener(toggle)
-        toggle.syncState()
-
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
-        // Устанавливаем обработчик клика на элементы меню
-        navigationView.setNavigationItemSelectedListener { menuItem ->
-            // Обработка нажатий на элементы меню
-            when (menuItem.itemId) {
-                R.id.menu_item1 -> showToast("Item 1 Clicked")
-                R.id.menu_item_filter_by_date -> showToast("menu_item_filter_by_date 2 Clicked")
-                // Добавьте обработку других элементов меню при необходимости
-            }
-            true
-        }
     }
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.drawer_menu, menu)
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            android.R.id.home -> {
-                if (toggle.onOptionsItemSelected(item)) {
-                    return true
-                }
-            }
-            R.id.menu_item_filter_by_date -> {
-                // Здесь осуществляйте переход на FilterTransactionsActivity
-                val intent = Intent(this, FilterTransactionsActivity::class.java)
-                startActivity(intent)
-                return true
-            }
-            // Другие обработчики, если необходимо
-        }
-        return super.onOptionsItemSelected(item)*/
-
-    }
-
-
-
-
-
 
     private fun showToast(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()

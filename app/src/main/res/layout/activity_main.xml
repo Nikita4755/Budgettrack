@@ -155,11 +155,4 @@
         app:menu="@menu/drawer_menu" />
 
 </androidx.drawerlayout.widget.DrawerLayout>
-<!--
-<Button
-android:id="@+id/buttonGoToFilter"
-android:layout_width="wrap_content"
-android:layout_height="wrap_content"
-android:layout_marginTop="16dp"
 
-android:text="Перейти к фильтру" />-->

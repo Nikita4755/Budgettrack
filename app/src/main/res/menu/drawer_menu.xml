@@ -7,9 +7,7 @@
         <item
             android:id="@+id/menu_item_filter_by_date"
             android:title="Filter by Date" />
-        <item
-            android:id="@+id/menu_item1"
-            android:title="Пункт меню 1" />
+
 
     </group>
 </menu>
