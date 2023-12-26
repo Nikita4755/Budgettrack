@@ -27,7 +27,6 @@ class FilterTransactionsActivity : AppCompatActivity() {
     private var startDate: String = ""
     private var endDate: String = ""
 
-    // Добавляем переменную для хранения базы данных
     private lateinit var db: AppDatabase
     private val calendar = Calendar.getInstance()
 
@@ -35,11 +34,9 @@ class FilterTransactionsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_filter_transactions)
 
-        // В предположении, что AppDatabase - это корректное имя класса вашей базы данных Room
         db = Room.databaseBuilder(this, AppDatabase::class.java, "transactions")
             .fallbackToDestructiveMigration()
             .build()
-        // В предположении, что AppDatabase - это корректное имя класса вашей базы данных Room
 
 
         recyclerViewTransactions.layoutManager = LinearLayoutManager(this)
@@ -47,7 +44,6 @@ class FilterTransactionsActivity : AppCompatActivity() {
             TransactionAdapter(emptyList()) // Инициализируйте свой адаптер под свои нужды
         recyclerViewTransactions.layoutManager = LinearLayoutManager(this)
         recyclerViewTransactions.adapter = transactionAdapter
-        // В предположении, что AppDatabase - это корректное имя класса вашей базы данных Room
         val db = Room.databaseBuilder(this, AppDatabase::class.java, "transactions")
             .fallbackToDestructiveMigration()
             .build()
@@ -83,7 +79,6 @@ class FilterTransactionsActivity : AppCompatActivity() {
         }
     }
 
-    // Где-то внутри вашей активности или фрагмента
     private fun showDatePickerDialog(onDateSelected: (String) -> Unit) {
         val datePickerDialog = DatePickerDialog(
             this,
